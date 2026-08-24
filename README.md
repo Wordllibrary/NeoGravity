@@ -30,20 +30,20 @@ python3 verify_neogravity.py
 | 8 | Frame dragging: topology vs prefactor | Explicit statement of what is fitted |
 | 9 | PTA correlation functions | Hellings-Downs and scalar-transverse evaluated |
 | 10 | SMBHB orbital frequencies | Kepler's third law across parameter space |
-| â | Dimensional consistency | Unit audit of every composite quantity |
+| — | Dimensional consistency | Unit audit of every composite quantity |
 
 ## Epistemic status, stated plainly
 
 The suite distinguishes three categories and prints the classification for
 each result:
 
-- **DERIVED** â follows from the postulates with no free parameters:
+- **DERIVED** — follows from the postulates with no free parameters:
   equilibrium profile, refractive index form, perihelion advance,
   gravitational redshift, Shapiro delay.
-- **CALIBRATED** â fixed by matching one observation:
+- **CALIBRATED** — fixed by matching one observation:
   - `w = 1/4` from the measured solar light deflection
   - `R_eff` from the measured frame-dragging amplitude
-- **TOPOLOGY ONLY** â shared functional form, physically distinct mechanism:
+- **TOPOLOGY ONLY** — shared functional form, physically distinct mechanism:
   the frame-dragging dipole `sin(theta)/r^2`.
 
 **The series has two fitted constants, not one.** Any statement to the
