@@ -1,96 +1,147 @@
 
-========================================================================
-CLAIM 1 -- Hydrostatic equilibrium of the plenum
-========================================================================
-ODE          :  w c^2 drho/dr = rho GM/r^2
-Solution     :  Eq(rho(r), C1*exp(-GM/(c**2*r*w)))
-Boundary     :  rho -> rho_0 as r -> oo : 1
-[PASS] rho(r) = rho_0 exp[-GM/(w c^2 r)]
+NeoGravity Verification Suite
+=============================
+Companion computational materials for
+"The Theory of NeoGravity & Ether Dynamics"
+John Salvatore Guagliardo, Independent Researcher
+ORCID: 0000-0003-0756-6886
 
-========================================================================
-CLAIM 2 -- CRITICAL: exponential is NOT a 1/r power law
-========================================================================
-rho(r)/rho_0 = exp(-A/r)
-Large-r expansion: 1 - A/r + A**2/(2*r**2) + O(r**(-3), (r, oo))
+Every central mathematical claim in the series, reduced to executable code.
+
+Run:      python3 verify_neogravity.py
+Requires: sympy, numpy
+
+CONVENTIONS (v2.0, canonical)
+-----------------------------
+  Ether Plenum      the space-filling Lorentz-invariant medium
+  Radiative Undertow  the INWARD reaction load; identified with gravitation
+  Ether Density     rho_ether INCREASES toward a gravitating mass
+  Refractive index  n = sqrt(rho / rho_0)   (denser medium -> slower light)
+
+Each claim prints PASS / FAIL / NOTE. Where a result is CALIBRATED rather
+than DERIVED, the script says so explicitly. Nothing is asserted here
+without being computed.
+
+
+==========================================================================
+CLAIM 1 -- Hydrostatic equilibrium of the Ether Plenum
+==========================================================================
+Undertow is inward (compressive):  w c^2 drho/dr = -rho GM/r^2
+Solution : Eq(rho(r), C1*exp(GM/(c**2*r*w)))
+Boundary : rho -> rho_0 as r -> oo : 1
+[PASS] rho(r) = rho_0 exp[+GM/(w c^2 r)]
+[NOTE] Ether Density RISES toward the mass. Medium is compressed,
+[NOTE] not rarefied. This matches the inward Radiative Undertow.
+
+==========================================================================
+CLAIM 2 -- CRITICAL: the exponential is NOT a 1/r power law
+==========================================================================
+rho(r)/rho_0 = exp(+A/r)
+Large-r expansion: 1 + A/r + A**2/(2*r**2) + O(r**(-3), (r, oo))
 [NOTE] The 1/r dependence lies in the EXPONENT.
-[NOTE] A 1/r *perturbation* emerges only at FIRST ORDER.
-[NOTE] Correct phrasing: 'integrating the 1/r^2 force yields a
-[NOTE] profile whose exponent depends on 1/r, which at first order
-[NOTE] produces the required 1/r potential perturbation.'
+[NOTE] A 1/r perturbation emerges only at FIRST ORDER.
+[NOTE] Correct phrasing: 'integrating the 1/r^2 load yields a profile
+[NOTE] whose exponent depends on 1/r, which at first order produces
+[NOTE] the required 1/r potential perturbation.'
 [FAIL] if any manuscript says 'produces a 1/r profile' unqualified.
 
-========================================================================
+==========================================================================
 CLAIM 3 -- Calibration of the equation of state, w = 1/4
-========================================================================
-n(r) = sqrt(rho_0/rho) = exp[ GM/(2 w c^2 r) ]
+==========================================================================
+n(r) = sqrt(rho/rho_0) = exp[ GM/(2 w c^2 r) ]
 First-order coefficient: 1/(2*r*w)
-Require = 2/r (to match measured 1.75 arcsec)  =>  w = [1/4]
+Require = 2/r (to match the measured 1.75 arcsec)  =>  w = [1/4]
 [PASS] w = 1/4, i.e. P = rho c^2 / 4
-[NOTE] CALIBRATED, not derived. Epistemic status = Newton's G.
-[NOTE] Open problem: why 1/4 and not 1/3 (isotropic photon gas)?
+[NOTE] CALIBRATED, not derived. Same epistemic status as Newton's G,
+[NOTE] which Cavendish measured 111 years after the Principia.
+[NOTE] OPEN PROBLEM: why 1/4 and not the 1/3 of an isotropic photon gas?
 
-========================================================================
+==========================================================================
 CLAIM 4 -- Second-order divergence from GR (the falsifiable prediction)
-========================================================================
+==========================================================================
 n_ether = 2*x**2 + 2*x + 1
 n_GR    = 7*x**2/4 + 2*x + 1
-2nd-order coefficients: ether = 2, GR = 7/4
-[PASS] 1st order identical (both 2x) -- agrees with all existing tests
+[PASS] 1st order identical (both 2x): agrees with every existing test
 [PASS] 2nd order differs: 2 vs 7/4  (ratio 1.14286)
 Solar limb x = 2.1230e-06;  predicted difference = 0.232 microarcsec
 [NOTE] Gaia precision ~20-25 uas. NOT currently testable.
+[NOTE] Falsifiable in principle: within next-generation design targets.
 
-========================================================================
+==========================================================================
 CLAIM 5 -- Light deflection, three routes
-========================================================================
-Newtonian corpuscle : 0.8758 arcsec   (historically refuted)
-Fluid/Fermat        : 1.7516 arcsec
-GR null geodesic    : 1.7516 arcsec   (same closed form)
+==========================================================================
+Newtonian corpuscle : 0.8758 arcsec  (refuted)
+Fluid / Fermat      : 1.7516 arcsec
+GR null geodesic    : 1.7516 arcsec
 Observed (VLBI)     : 1.7500 +/- 0.0002 arcsec
 [PASS] fluid and GR agree exactly; within 1 sigma of observation
-[NOTE] NOT independent confirmation: w was calibrated on this datum.
+[NOTE] NOT independent confirmation: w was CALIBRATED on this datum.
 
-========================================================================
-CLAIM 6 -- Mercury perihelion advance
-========================================================================
+==========================================================================
+CLAIM 6 -- Mercury perihelion (genuinely independent of the calibration)
+==========================================================================
 Delta phi = 6 pi GM/[a(1-e^2)c^2] per orbit
 Predicted : 42.992 arcsec/century  (fluid Binet AND GR geodesic)
 Observed  : 42.98 +/- 0.04 arcsec/century
-[PASS] within 1 sigma; genuinely independent of the w calibration
+[PASS] within 1 sigma
+[NOTE] This IS independent evidence: w was not fitted to it.
 
-========================================================================
+==========================================================================
 CLAIM 7 -- Gravitational redshift and Shapiro delay
-========================================================================
+==========================================================================
 Pound-Rebka z = GM h /(c^2 R^2) = 2.4585e-15
 Measured (Pound-Snider 1965)   = 2.57e-15 +/- 0.26e-15
-[PASS] within 1 sigma
+[PASS] within 1 sigma  [independent of the calibration]
 
 Shapiro round trip = (4GM/c^3) ln(4 r1 r2 / b^2) = 232.6 us
-Literature value ~240 us
-[PASS] consistent
+Literature ~240 us
+[PASS] consistent  [independent of the calibration]
+[NOTE] In the Ether Plenum this is elementary: the signal crosses a
+[NOTE] region of elevated Ether Density and slows, as light in glass.
 
-========================================================================
-CLAIM 8 -- CRITICAL: frame dragging is TOPOLOGY match + FITTED prefactor
-========================================================================
+==========================================================================
+CLAIM 8 -- CRITICAL: frame dragging is TOPOLOGY + a SECOND fitted constant
+==========================================================================
 Stokes rotating sphere : v = Omega R^3 sin(th) / r^2
 GR Lense-Thirring drag : v = 2 G J sin(th) / (c^2 r^2)
 [PASS] identical DIPOLE TOPOLOGY: both go as sin(theta)/r^2
-[FAIL] claiming 'algebraically identical' physical fields.
-[NOTE] Stokes flow requires viscosity + no-slip boundary at r=R.
+[FAIL] claiming the two are 'algebraically identical' physical fields.
+[NOTE] Stokes flow requires viscosity and a no-slip boundary at r=R.
 [NOTE] Kerr is a VACUUM solution (T_munu = 0). Mechanisms differ.
-[NOTE] The prefactor is MATCHED by defining R_eff via
-[NOTE]     Omega R_eff^3 = 2GJ/c^2
+[NOTE] The prefactor is MATCHED by defining R_eff through
+[NOTE]     Omega R_eff^3 = 2 G J / c^2
 [NOTE] Computing the ratio after imposing this returns 1 BY
 [NOTE] CONSTRUCTION. That is calibration, not derivation.
 
-Earth: J = 5.8457e+33 kg m^2/s ; R_eff = 4919.6 m = 4.92 km
+Earth: I = 0.3307 M R^2  ->  J = 5.8457e+33 kg m^2/s
+       R_eff = 4919.6 m = 4.92 km   <-- CANONICAL VALUE
+[NOTE] Using the uniform-sphere I = (2/5)MR^2 overstates J by 21%
+[NOTE] and yields an incorrect R_eff of ~5.24 km. Do not use it.
 [NOTE] >>> R_eff IS A SECOND FITTED CONSTANT. <<<
 [NOTE] Any claim of 'a single calibrated constant' is FALSE.
-[NOTE] The series has TWO: w (static) and R_eff (rotational).
+[NOTE] The framework has TWO: w (static) and R_eff (rotational).
 
-========================================================================
-CLAIM 9 -- PTA correlation functions (Paper on nanohertz background)
-========================================================================
+==========================================================================
+CLAIM 9 -- Two constraints on the Radiative Undertow mechanism
+==========================================================================
+Solar radiation pressure at 1 AU : 4.5404e-06 Pa
+Radiation force on Earth's disc  : 5.7897e+08 N
+Gravitational force on Earth     : 3.5425e+22 N
+Ratio                            : 1.6344e-14
+[NOTE] Ordinary photon pressure is ~6.12e+13 times too weak.
+[NOTE] The Undertow is NOT identified with measured radiation pressure,
+[NOTE] and is directed INWARD, opposite to it.
+
+Earth thermal output   : 1.2229e+17 W
+Luminosity ratio Sun/Earth : 3.1302e+09
+Mass ratio       Sun/Earth : 3.3303e+05
+Discrepancy                : 9399x
+[PASS] CONSTRAINT: the coupling CANNOT track thermal luminosity.
+[PASS] It must track total MASS-ENERGY. A cold body still gravitates.
+
+==========================================================================
+CLAIM 10 -- PTA correlation functions
+==========================================================================
  sep(deg)   Hellings-Downs   Scalar-transverse
     0.01      +0.5000          +0.5000
    10.00      +0.4425          +0.4981
@@ -104,17 +155,16 @@ CLAIM 9 -- PTA correlation functions (Paper on nanohertz background)
   180.00      +0.2500          +0.2500
 
 HD minimum -0.1519 at 82.5 deg
-HD zero crossings near 49.2 and 121.8 deg
-ST range: 0.2500 to 0.5000 -- strictly positive
+ST range 0.2500 to 0.5000 -- strictly positive
 [PASS] HD is ANTI-correlated near 82.6 deg; ST never is.
-[NOTE] This is a STRUCTURAL difference, not a coefficient mismatch.
+[NOTE] STRUCTURAL difference, not a coefficient mismatch.
 [NOTE] Reported Bayes factor favouring HD over ST: ~2 to 2.5
-[NOTE] Jeffreys scale 1-3 = 'barely worth mentioning'.
-[NOTE] Plenum reading is DISFAVOURED but NOT excluded.
+[NOTE] Jeffreys 1-3 = 'barely worth mentioning'.
+[NOTE] The plenum reading is DISFAVOURED but NOT excluded.
 
-========================================================================
-CLAIM 10 -- SMBHB orbital frequencies fall in the PTA band
-========================================================================
+==========================================================================
+CLAIM 11 -- SMBHB orbital frequencies populate the PTA band
+==========================================================================
  M each      sep(pc)    period(yr)    f = 2/T (nHz)
  1e+08       0.001          0.21        302.58
  1e+08       0.010          6.62          9.57
@@ -128,27 +178,29 @@ CLAIM 10 -- SMBHB orbital frequencies fall in the PTA band
 [PASS] PTA band ~1-100 nHz is populated by SMBHB orbital timescales
 [NOTE] True under EITHER interpretation; not discriminating.
 
-========================================================================
-DIMENSIONAL CONSISTENCY CHECKS
-========================================================================
-rho_ether = u/c^2      : (J/m^3)/(m^2/s^2) = kg/m^3        [PASS]
-L/(4 pi r^2 c^3)       : W/(m^2 * m^3/s^3) = kg/m^3        [PASS]
-GM/(r c^2)             : dimensionless                     [PASS]
-  -> must MULTIPLY a density, never be ADDED to one.
+==========================================================================
+DIMENSIONAL CONSISTENCY
+==========================================================================
+rho_ether = u/c^2   : (J/m^3)/(m^2/s^2) = kg/m^3           [PASS]
+L/(4 pi r^2 c^3)    : W/(m^2 * m^3/s^3) = kg/m^3           [PASS]
+GM/(r c^2)          : dimensionless                        [PASS]
+   -> must MULTIPLY a density, never be ADDED to one.
 omega_ether = (rho c^5/hbar)^(1/4) : 1/s                   [PASS]
 
-u_CMB = a T^4 = 4.1717e-14 J/m^3
+u_CMB   = a T^4 = 4.1717e-14 J/m^3
 rho_CMB = u/c^2 = 4.6417e-31 kg/m^3
 
-========================================================================
+==========================================================================
 SUMMARY OF EPISTEMIC STATUS
-========================================================================
-DERIVED    : equilibrium profile; refractive index form;
-             perihelion advance; redshift; Shapiro delay
-CALIBRATED : w = 1/4 (from light deflection)
-CALIBRATED : R_eff  (from frame-dragging amplitude)
-TOPOLOGY   : frame-drag dipole shape (sin th / r^2)
-OPEN       : w from first principles; Lorentz-invariance bounds;
-             strong field; PTA polarization content
+==========================================================================
+DERIVED     : equilibrium profile; refractive index form;
+              perihelion advance; redshift; Shapiro delay;
+              inverse-square form of the Undertow (shell geometry)
+CALIBRATED  : w = 1/4        (from light deflection)
+CALIBRATED  : R_eff = 4920 m (from frame-dragging amplitude)
+TOPOLOGY    : frame-drag dipole shape sin(theta)/r^2
+CONSTRAINT  : coupling tracks mass-energy, not thermal luminosity
+OPEN        : w from first principles; Lorentz-invariance bounds;
+              strong field; PTA polarization content of the Plenum
 
-Two fitted constants. Not one. State this plainly.
+>>> TWO fitted constants. Not one. State this plainly. <<<
